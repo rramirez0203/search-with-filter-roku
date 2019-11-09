@@ -1,0 +1,11 @@
+/out
+/out/bundle.zip
+/.DS_Store
+./.DS_Store
+app.mk
+makefile
+.vscode/tasks.json
+.vscode/launch.json
+.DS_Store
+.DS_Store
+.vscode/settings.json
