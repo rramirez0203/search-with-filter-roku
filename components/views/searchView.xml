@@ -34,16 +34,17 @@
         rowTitleComponentName="rowTitleItem"
         drawFocusFeedback="true"
         showRowCounter="[false]"
-        translation="[600,225]"
+        translation="[700,225]"
         vertFocusAnimationStyle="floatingFocus"
+        rowFocusAnimationStyle="floatingFocus"
         itemComponentName="SearchItem"        
-        itemSize="[1300,500]"
+        itemSize="[1180,500]"
         rowHeights="[500]"
         numRows="1"
         rowItemSize="[[240,320]]"
         rowItemSpacing="[[20,0]]"
-        focusXOffset="[90]"
-        rowLabelOffset="[ [90, 0] ]"
+        focusXOffset="[0]"
+        rowLabelOffset="[ [0, 0] ]"
         showRowLabel="[true,false]"/>
       <!-- <BusySpinner id="spinner" clockwise="true" spinInterval="0.8" visible="true"/> -->
       <!-- <Label id="noResultsLabel" horizAlign="left" vertAlign="top" visible="false" color="#eeeeee" translation="[860,200]" width="990" wrap="true">

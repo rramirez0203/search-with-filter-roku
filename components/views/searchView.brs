@@ -89,7 +89,7 @@ function onKeyEvent(key as string, press as boolean) as boolean
             focusList()
             handled = true
         else if key = "back"
-            m.searchList.jumpToRowItem = [0, 0]
+            m.searchList.jumpToRowItem = 0
             handled = true
         end if
     end if
