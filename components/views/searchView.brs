@@ -5,8 +5,10 @@ sub init()
     m.labelText = m.top.findNode("LabelText")
     m.inputTimer = m.top.findNode("inputTimer")
     m.searchList = m.top.findNode("searchList")
+    m.searchListFilters =m.top.findNode("searchListFilters")
     m.inputTimer.ObserveField("fire", "search")
     m.top.observeField("listData", "onListContentChange")
+    createFilters()
 end sub
 
 sub focusKeyboard()
@@ -28,11 +30,11 @@ sub search()
     m.top.searching = true
 end sub
 
-sub onInput(event)    
+sub onInput(event)
     m.labelText.text = event.getData()
     CANCEL()
     if Len(m.top.keyboardText) >= 1
-        m.inputTimer.control = "start"    
+        m.inputTimer.control = "start"
     end if
 end sub
 
@@ -41,6 +43,25 @@ sub onListContentChange(event)
     data = event.getData()
     m.searchList.content = data
 end sub
+
+sub createFilters()
+    print "@@@@@ createFilters @@@@@"
+    data = CreateObject("roSGNode", "ContentNode")
+    items = [
+        { title: "all", selected: true },
+        { title: "movies", selected: false },
+        { title: "series", selected: false }
+    ]
+    row = data.CreateChild("ContentNode")
+    for each currentItem in items
+        item = row.CreateChild("SearchFilterNode")
+        item.labeltext = currentItem.title
+        item.isselected = currentItem.selected
+        print currentItem, item
+    end for
+    m.searchListFilters.content = data    
+end sub
+
 
 function onKeyEvent(key as string, press as boolean) as boolean
     handled = false

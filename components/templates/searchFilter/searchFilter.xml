@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="SearchFilter" extends="Group">
+<interface>
+    <field id="itemContent" type="node" onChange="itemContentChanged"/> 
+</interface>
+<script type="text/brightscript" uri="pkg:/components/templates/searchFilter/searchFilter.brs"/>
+<children>    
+    <Rectangle id="rectangle" color="#FFFFFF1A" opacity="1" width="144" height="50" translation="[0,0]"/>    
+    <Label id="itemText" vertAlign="center" horizAlign="center" translation="[0,0]" font="font:MediumSystemFont" color="#ffffff" size="12" width="144" height="50"/>
+</children>
+</component>
