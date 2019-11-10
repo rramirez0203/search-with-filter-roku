@@ -60,7 +60,10 @@
       </Animation>
       <Animation id="addOpacityKeyboardAnimation" duration="0.3" easeFunction="linear">
         <FloatFieldInterpolator key="[0,1]" keyValue="[ 1, 0.5 ]" fieldToInterp="searchKeyboard.opacity"/>
-      </Animation>      
+      </Animation>  
+      <Animation id="addOpacityFiltersAnimation" duration="0.3" easeFunction="linear">
+        <FloatFieldInterpolator key="[0,1]" keyValue="[ 1, 0.5 ]" fieldToInterp="searchListFilters.opacity"/>
+      </Animation>          
     </ParallelAnimation>
 
     <ParallelAnimation id="presentKeyboardAnimation">
@@ -69,6 +72,9 @@
       </Animation>
       <Animation id="addOpacityKeyboardAnimation" duration="0.3" easeFunction="linear">
         <FloatFieldInterpolator key="[0,1]" keyValue="[ 0.5, 1 ]" fieldToInterp="searchKeyboard.opacity"/>
+      </Animation>      
+      <Animation id="addOpacityFiltersAnimation" duration="0.3" easeFunction="linear">
+        <FloatFieldInterpolator key="[0,1]" keyValue="[ 0.5, 1 ]" fieldToInterp="searchListFilters.opacity"/>
       </Animation>      
     </ParallelAnimation>
   </children>

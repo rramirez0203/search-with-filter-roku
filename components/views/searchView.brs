@@ -66,7 +66,7 @@ sub displayErrors(isVisible = true, error = {message: "No results availables :/"
     print "@@@@@@@@ display errors @@@@@@@@", error
     m.noResultsLabel.text = error.message
     m.noResultsLabel.visible = isVisible
-    focusKeyboard()
+    ' focusKeyboard()
 end sub
 
 sub onListContentChange(event)
