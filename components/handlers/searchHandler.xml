@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--********** Copyright 2017 Roku Corp.  All Rights Reserved. **********-->
+
+<component name="SearchHandler" extends="Task" xsi:noNamespaceSchemaLocation="https://devtools.web.roku.com/schema/RokuSceneGraph.xsd">
+  <interface>
+        <field id="options" type="AssociativeArray" />        
+        <field id="content" type="node" alwaysNotify="true"/>        
+        <field id="error" type="node" />
+    </interface>
+    <script type="text/brightscript" uri="pkg:/components/handlers/searchHandler.brs" />    
+    <script type="text/brightscript" uri="pkg:/components/Url.brs"/>
+    <script type="text/brightscript" uri="pkg:/components/Utils.brs"/>
+</component>

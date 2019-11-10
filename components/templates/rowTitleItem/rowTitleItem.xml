@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="rowTitleItem" extends="Group">
+<interface> 
+  <field id="content" type="node" alwaysNotify="true"/>
+</interface>
+<script type="text/brightscript">
+    <![CDATA[
+  function itemContentChanged() as void
+    itemData = m.top.content    
+    m.buttonTitle.translation=[0,-20]    
+    m.buttonTitle.text = UCase(itemData.title)
+  end function
+
+  function init() as void
+    m.buttonTitle = m.top.findNode("itemText")    
+    m.top.observeField("content", "itemContentChanged")
+  end function
+    ]]>
+</script>
+<children>
+    <LayoutGroup layoutDirection="vert" vertAlignment="top" itemSpacings="0" translation="[0,-5]" >        
+        <Label id="itemText" horizAlign="center" translation="[0,0]" font="font:MediumSystemFont" width="196" height="65" />
+    </LayoutGroup>
+</children>
+</component>
