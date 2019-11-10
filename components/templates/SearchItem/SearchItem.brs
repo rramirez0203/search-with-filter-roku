@@ -2,7 +2,7 @@ function itemContentChanged() as void
     itemData = m.top.itemContent
     m.itemImage.uri = itemData.posterUrl
     m.itemText.text = itemData.labelText
-    m.itemmediaType.text = itemData.mediaType
+    m.itemmediaType.text = itemData.mediaType + " | " + itemData.year
 end function
 
 function init() as void

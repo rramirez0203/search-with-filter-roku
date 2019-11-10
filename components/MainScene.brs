@@ -11,13 +11,11 @@ sub onInput(event)
 end sub
 
 sub onStartSearch(event)
-    if event.getData()
-        print "SHOULD START SEARCH", m.searchView.keyboardText
+    if event.getData()        
         m.searchTask = CreateObject("roSGNode", "SearchHandler")
         m.searchTask.observeField("content", "onSearchRetrieved")
         m.searchTask.observeField("error", "onError")
-        ' m.searchTask.options = { "query": m.searchView.keyboardText, "httpType": "timeout", "httpQuantity": 60 }
-        m.searchTask.options = { "query": "the house", "httpType": "timeout", "httpQuantity": 60 }
+        m.searchTask.options = { "query": m.searchView.keyboardText, "httpType": "timeout", "httpQuantity": 60, mediatype: m.searchView.currentFilter }        
         m.searchTask.control = "RUN"
     end if
 end sub
@@ -26,4 +24,10 @@ sub onSearchRetrieved(event)
     data = event.getData()
     PRINT "onSearchRetrieved:", data.
     m.searchView.listData = data
+end sub
+
+sub onError(event)
+    data = event.getData()
+    ' todo pass error to searchview
+    print "data:", data
 end sub

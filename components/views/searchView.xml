@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <component name="SearchView" extends="Group">
   <interface>
+    <field id="currentFilter" type="string" alwaysNotify="true"/>    
     <field id="searching" type="boolean" alwaysNotify="true"/>    
     <field id="showSpinner" type="boolean" alwaysNotify="true"/>    
     <field id="keyboardText" type="string" alias="searchKeyboard.text" alwaysNotify="true"/>
     <field id="listData" type="node" alwaysNotify="true"/>
+    <field id="filterSelected" type="integer" alias="searchListFilters.rowItemSelected" alwaysNotify="true"/>
     <function name="focusList"/>
     <function name="focusKeyboard"/>
   </interface>

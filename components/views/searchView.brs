@@ -1,6 +1,7 @@
 sub init()
     m.top.observeField("keyboardText", "onInput")
     print "SEARCH VIEW -> init"
+    m.currentFilter = 0 '0=ALL,1=MOVIES,2=SERIES
     m.searchKeyboard = m.top.findNode("searchKeyboard")
     m.labelText = m.top.findNode("LabelText")
     m.labelText.font.size = 50
@@ -9,7 +10,9 @@ sub init()
     m.searchListFilters = m.top.findNode("searchListFilters")
     m.inputTimer.ObserveField("fire", "search")
     m.top.observeField("listData", "onListContentChange")
+    m.top.observeField("filterSelected", "onFilterSelected")
     createFilters()
+    m.filters = ["", "movie", "series"]
 end sub
 
 sub focusKeyboard()
@@ -25,13 +28,13 @@ sub focusFilters()
 end sub
 
 sub CANCEL()
-    ? "cancel"
+    ? "@@@@@@@@ cancel @@@@@@@@"
     m.inputTimer.control = "stop"
     m.top.searching = false
 end sub
 
 sub search()
-    ? "search"
+    ? "@@@@@@@@ search @@@@@@@@"
     ' m.searchlist.content = invalid
     ' m.searchList.visible = false
     ' m.searchList.jumpToRowItem = [0, 0]
@@ -95,3 +98,13 @@ function onKeyEvent(key as string, press as boolean) as boolean
     end if
     return handled
 end function
+
+sub onFilterSelected(event)
+    itemIndex = event.getData()[1]
+    rowContent = m.searchListFilters.content.getChild(0)
+    rowContent.getChild(m.currentFilter).isselected = false
+    m.currentFilter = itemIndex
+    rowContent.getChild(itemIndex).isselected = true
+    m.top.currentFilter = m.filters[itemIndex]
+    search()    
+end sub
