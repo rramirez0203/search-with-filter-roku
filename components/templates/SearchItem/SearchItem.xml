@@ -6,7 +6,7 @@
 <script type="text/brightscript" uri="pkg:/components/templates/SearchItem/SearchItem.brs"/>
 <children>
     <LayoutGroup layoutDirection="vert" vertAlignment="top" itemSpacings="20" translation="[0,0]" >
-        <Poster id="itemImage" translation="[0,0]" loadWidth="240" loadHeight="320" loadDisplayMode="scaleToFill" width="240" height="320" />
+        <Poster id="itemImage" translation="[0,0]" loadWidth="240" loadHeight="320" loadDisplayMode="scaleToFill" width="240" height="320" failedBitmapUri="pkg:/images/default.9.png" />
         <Label id="itemText" horizAlign="left" translation="[0,0]" font="font:MediumSystemFont" width="240" height="5"/>        
         <Label id="itemmediaType" horizAlign="left" translation="[0,0]" font="font:SmallSystemFont" width="240" />
     </LayoutGroup>
