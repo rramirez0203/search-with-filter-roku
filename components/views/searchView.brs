@@ -3,9 +3,10 @@ sub init()
     print "SEARCH VIEW -> init"
     m.searchKeyboard = m.top.findNode("searchKeyboard")
     m.labelText = m.top.findNode("LabelText")
+    m.labelText.font.size = 50
     m.inputTimer = m.top.findNode("inputTimer")
     m.searchList = m.top.findNode("searchList")
-    m.searchListFilters =m.top.findNode("searchListFilters")
+    m.searchListFilters = m.top.findNode("searchListFilters")
     m.inputTimer.ObserveField("fire", "search")
     m.top.observeField("listData", "onListContentChange")
     createFilters()
@@ -13,6 +14,14 @@ end sub
 
 sub focusKeyboard()
     m.searchKeyboard.setFocus(true)
+end sub
+
+sub focusList()
+    m.searchList.setFocus(true)
+end sub
+
+sub focusFilters()
+    m.searchListFilters.setFocus(true)
 end sub
 
 sub CANCEL()
@@ -42,6 +51,7 @@ sub onListContentChange(event)
     print "####### onListContentChange #######"
     data = event.getData()
     m.searchList.content = data
+    m.top.searching = false
 end sub
 
 sub createFilters()
@@ -59,39 +69,29 @@ sub createFilters()
         item.isselected = currentItem.selected
         print currentItem, item
     end for
-    m.searchListFilters.content = data    
+    m.searchListFilters.content = data
 end sub
 
 
 function onKeyEvent(key as string, press as boolean) as boolean
     handled = false
-    ' print "KEY:", key
-    ' print "Press:", press
-    '   if press and m.top.isInFocusChain()
-    '       if key = "play" and m.searchList.hasFocus()
-    '         if m.searchList.content <> invalid and m.searchList.content.getChild(m.searchList.rowItemFocused[0]).getChild(m.searchList.rowItemFocused[1]) <> invalid
-    '           m.top.triggerByPlay = true
-    '           m.top.itemSelected  = m.searchlist.rowItemFocused
-    '         end if
-    '     else if key = "left" and m.searchList.hasFocus()
-    '       ' m.movingFromOtherPlace = true
-    '       ' m.allCollectionsItems.setFocus(false)
-    '       focusKeyboard()
-    '       ' m.allCollectionsItems.setFocus(false)
-    '       ' m.allCollectionsSections.setFocus(true)
-    '       ' m.focusSectionsTimer.control = "Start"
-    '       ' focusSections()
-    '       handled = true
-    '     else if key = "right" and m.searchKeyboard.isInFocusChain() and not m.top.searching and m.searchList.content <> invalid and m.searchList.visible
-    '       ' m.movingFromOtherPlace = true
-    '       focusList()
-    '       ' m.allCollectionsSections.setFocus(false)
-    '       handled = true
-    '     else if key = "back" or  key = "options" or key = "up"
-    '       m.top.showHeader  = true
-    '       m.top.focusHeader = true
-    '       handled = true
-    '     end if
-    '    end if
+    if press and m.top.isInFocusChain()
+        if key = "up" and m.searchKeyboard.isInFocusChain()
+            focusFilters()
+            handled = true
+        else if key = "down" and m.searchListFilters.isInFocusChain()
+            focusKeyboard()
+            handled = true
+        else if key = "left" and m.searchList.hasFocus()
+            focusKeyboard()
+            handled = true
+        else if key = "right" and m.searchKeyboard.isInFocusChain() and not m.top.searching and m.searchList.content <> invalid and m.searchList.visible
+            focusList()
+            handled = true
+        else if key = "back"
+            m.searchList.jumpToRowItem = [0, 0]
+            handled = true
+        end if
+    end if
     return handled
 end function

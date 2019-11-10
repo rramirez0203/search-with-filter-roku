@@ -12,7 +12,7 @@
   <children>
     <Rectangle color="#171717" width="1920" height="1080" translation="[0,0]">          
       <Rectangle color="#FFFFFF1A" opacity="1" width="490" height="80" translation="[115,100]"/>
-      <Label id="LabelText" text="" width="478" height="50" horizAlign="left" vertAlign="center" translation="[122,100]" wrap="true"/>
+      <Label id="LabelText" text="" width="478" height="80" horizAlign="left" vertAlign="center" translation="[122,100]" wrap="true" font="font:MediumSystemFont"/>
       <RowList
         id="searchListFilters"        
         drawFocusFeedback="true"
@@ -34,7 +34,7 @@
         rowTitleComponentName="rowTitleItem"
         drawFocusFeedback="true"
         showRowCounter="[false]"
-        translation="[600,200]"
+        translation="[600,225]"
         vertFocusAnimationStyle="floatingFocus"
         itemComponentName="SearchItem"        
         itemSize="[1300,500]"
