@@ -12,45 +12,64 @@
   </interface>
   <script type="text/brightscript" uri="pkg:/components/views/searchView.brs"/>
   <children>
-    <Rectangle color="#171717" width="1920" height="1080" translation="[0,0]">          
-      <Rectangle color="#FFFFFF1A" opacity="1" width="490" height="80" translation="[115,100]"/>
-      <Label id="LabelText" text="" width="478" height="80" horizAlign="left" vertAlign="center" translation="[122,100]" wrap="true" font="font:MediumSystemFont"/>
-      <RowList
-        id="searchListFilters"        
-        drawFocusFeedback="true"
-        showRowCounter="[false]"
-        translation="[26,183]"
-        vertFocusAnimationStyle="floatingFocus"
-        itemComponentName="SearchFilter"        
-        itemSize="[600,50]"
-        rowHeights="[100]"
-        numRows="1"
-        rowItemSize="[[150,54]]"
-        rowItemSpacing="[[20,10]]"
-        focusXOffset="[90]"
-        rowLabelOffset="[ [90, 0] ]"
-        showRowLabel="[true,false]"/>
-      <MiniKeyboard id="searchKeyboard" lowerCase="true" translation="[100,280]" scale="[0.9,0.9]" showTextEditBox="false"/>
-      <RowList
-        id="searchList"
-        rowTitleComponentName="rowTitleItem"
-        drawFocusFeedback="true"
-        showRowCounter="[false]"
-        translation="[700,225]"
-        vertFocusAnimationStyle="floatingFocus"
-        rowFocusAnimationStyle="floatingFocus"
-        itemComponentName="SearchItem"        
-        itemSize="[1180,500]"
-        rowHeights="[500]"
-        numRows="1"
-        rowItemSize="[[240,320]]"
-        rowItemSpacing="[[20,0]]"
-        focusXOffset="[0]"
-        rowLabelOffset="[ [0, 0] ]"
-        showRowLabel="[true,false]"/>
-      <Label id="noResultsLabel" horizAlign="left" vertAlign="top" visible="false" color="#eeeeee" translation="[860,200]" width="990" wrap="true"></Label>
+    <Rectangle color="#171717" width="1920" height="1080" translation="[0,0]">  
+      <Group id="screenBody">
+        <Rectangle color="#FFFFFF1A" opacity="1" width="490" height="80" translation="[115,100]"/>
+        <Label id="LabelText" text="" width="478" height="80" horizAlign="left" vertAlign="center" translation="[122,100]" wrap="true" font="font:MediumSystemFont"/>
+        <RowList
+          id="searchListFilters"        
+          drawFocusFeedback="true"
+          showRowCounter="[false]"
+          translation="[26,183]"
+          vertFocusAnimationStyle="floatingFocus"
+          itemComponentName="SearchFilter"        
+          itemSize="[600,50]"
+          rowHeights="[100]"
+          numRows="1"
+          rowItemSize="[[150,54]]"
+          rowItemSpacing="[[20,10]]"
+          focusXOffset="[90]"
+          rowLabelOffset="[ [90, 0] ]"
+          showRowLabel="[true,false]"/>
+        <MiniKeyboard id="searchKeyboard" lowerCase="true" translation="[100,280]" scale="[0.9,0.9]" showTextEditBox="false"/>
+        <RowList
+          id="searchList"
+          rowTitleComponentName="rowTitleItem"
+          drawFocusFeedback="true"
+          showRowCounter="[false]"
+          translation="[700,225]"
+          vertFocusAnimationStyle="floatingFocus"
+          rowFocusAnimationStyle="floatingFocus"
+          itemComponentName="SearchItem"        
+          itemSize="[1600,500]"
+          rowHeights="[500]"
+          numRows="1"
+          rowItemSize="[[240,320]]"
+          rowItemSpacing="[[20,0]]"
+          focusXOffset="[0]"
+          rowLabelOffset="[ [0, 0] ]"
+          showRowLabel="[true,false]"/>
+        <Label id="noResultsLabel" horizAlign="left" vertAlign="top" visible="false" color="#eeeeee" translation="[860,200]" width="990" wrap="true"></Label>
+      </Group>
       <!-- <BusySpinner id="spinner" clockwise="true" spinInterval="0.8" visible="true"/> -->
     </Rectangle>
     <Timer id="inputTimer" repeat="false" duration="0.8"/>
+    <ParallelAnimation id="presentListAnimation">
+      <Animation id="showListAnimation" duration="0.3" easeFunction="outQuad">
+        <Vector2DFieldInterpolator key="[0,1]" keyValue="[ [0,0],[-430, 0] ]" fieldToInterp="screenBody.translation"/>
+      </Animation>
+      <Animation id="addOpacityKeyboardAnimation" duration="0.3" easeFunction="linear">
+        <FloatFieldInterpolator key="[0,1]" keyValue="[ 1, 0.5 ]" fieldToInterp="searchKeyboard.opacity"/>
+      </Animation>      
+    </ParallelAnimation>
+
+    <ParallelAnimation id="presentKeyboardAnimation">
+      <Animation id="showListAnimation" duration="0.3" easeFunction="outQuad">
+        <Vector2DFieldInterpolator key="[0,1]" keyValue="[ [-430, 0], [0,0]]" fieldToInterp="screenBody.translation"/>
+      </Animation>
+      <Animation id="addOpacityKeyboardAnimation" duration="0.3" easeFunction="linear">
+        <FloatFieldInterpolator key="[0,1]" keyValue="[ 0.5, 1 ]" fieldToInterp="searchKeyboard.opacity"/>
+      </Animation>      
+    </ParallelAnimation>
   </children>
 </component>

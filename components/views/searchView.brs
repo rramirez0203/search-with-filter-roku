@@ -14,14 +14,22 @@ sub init()
     m.top.observeField("filterSelected", "onFilterSelected")
     createFilters()
     m.filters = ["", "movie", "series"]
+    m.presentListAnimation = m.top.findNode("presentListAnimation")
+    m.presentKeyboardAnimation = m.top.findNode("presentKeyboardAnimation")
 end sub
 
-sub focusKeyboard()
+sub focusKeyboard(animate=false)
     m.searchKeyboard.setFocus(true)
+    if not animate return
+    m.presentListAnimation.control = "STOP"
+    m.presentKeyboardAnimation.control = "START"
 end sub
 
-sub focusList()
+sub focusList(animate=false)
     m.searchList.setFocus(true)
+    if not animate return
+    m.presentListAnimation.control = "START"
+    m.presentKeyboardAnimation.control = "STOP"
 end sub
 
 sub focusFilters()
@@ -36,9 +44,9 @@ end sub
 
 sub search()
     ? "@@@@@@@@ search @@@@@@@@"
-    ' m.searchlist.content = invalid
-    ' m.searchList.visible = false
-    ' m.searchList.jumpToRowItem = [0, 0]
+    m.searchlist.content = invalid
+    m.searchList.visible = false
+    m.searchList.jumpToRowItem = [0, 0]
     ' m.top.showSpinner = true
     m.noResultsLabel.visible = false
     m.top.searching = true
@@ -48,7 +56,8 @@ sub onInput(event)
     ? "@@@@@@@@ onInput @@@@@@@@"
     m.labelText.text = event.getData()
     CANCEL()
-    if Len(m.top.keyboardText) >= 1
+    if Len(m.top.keyboardText) >= 1     
+        m.searchlist.content = invalid
         m.inputTimer.control = "start"
     end if
 end sub
@@ -57,6 +66,7 @@ sub displayErrors(isVisible = true, error = {message: "No results availables :/"
     print "@@@@@@@@ display errors @@@@@@@@", error
     m.noResultsLabel.text = error.message
     m.noResultsLabel.visible = isVisible
+    focusKeyboard()
 end sub
 
 sub onListContentChange(event)
@@ -102,10 +112,10 @@ function onKeyEvent(key as string, press as boolean) as boolean
             focusKeyboard()
             handled = true
         else if key = "left" and m.searchList.hasFocus()
-            focusKeyboard()
+            focusKeyboard(true)
             handled = true
         else if key = "right" and m.searchKeyboard.isInFocusChain() and not m.top.searching and m.searchList.content <> invalid and m.searchList.visible
-            focusList()
+            focusList(true)
             handled = true
         else if key = "back"
             m.searchList.jumpToRowItem = 0
