@@ -3,5 +3,6 @@
 <interface> 
   <field id="message" type="string" />
   <field id="errorType" type="string" />  
+  <field id="isError" type="boolean" value="true" />  
 </interface>
 </component>

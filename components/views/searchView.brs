@@ -7,6 +7,7 @@ sub init()
     m.labelText.font.size = 50
     m.inputTimer = m.top.findNode("inputTimer")
     m.searchList = m.top.findNode("searchList")
+    m.noResultsLabel = m.top.findNode("noResultsLabel")
     m.searchListFilters = m.top.findNode("searchListFilters")
     m.inputTimer.ObserveField("fire", "search")
     m.top.observeField("listData", "onListContentChange")
@@ -39,10 +40,12 @@ sub search()
     ' m.searchList.visible = false
     ' m.searchList.jumpToRowItem = [0, 0]
     ' m.top.showSpinner = true
+    m.noResultsLabel.visible = false
     m.top.searching = true
 end sub
 
 sub onInput(event)
+    ? "@@@@@@@@ onInput @@@@@@@@"
     m.labelText.text = event.getData()
     CANCEL()
     if Len(m.top.keyboardText) >= 1
@@ -50,10 +53,23 @@ sub onInput(event)
     end if
 end sub
 
+sub displayErrors(isVisible = true, error = {message: "No results availables :/"})
+    print "@@@@@@@@ display errors @@@@@@@@", error
+    m.noResultsLabel.text = error.message
+    m.noResultsLabel.visible = isVisible
+end sub
+
 sub onListContentChange(event)
-    print "####### onListContentChange #######"
     data = event.getData()
-    m.searchList.content = data
+    print "####### onListContentChange #######", data
+    if data.doesExist("isError") and data.isError
+        m.searchList.visible = false
+        displayErrors(true, data)
+    else
+        displayErrors(false)
+        m.searchList.visible = true
+        m.searchList.content = data
+    end if
     m.top.searching = false
 end sub
 
@@ -106,5 +122,5 @@ sub onFilterSelected(event)
     m.currentFilter = itemIndex
     rowContent.getChild(itemIndex).isselected = true
     m.top.currentFilter = m.filters[itemIndex]
-    search()    
+    search()
 end sub

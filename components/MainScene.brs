@@ -27,7 +27,7 @@ sub onSearchRetrieved(event)
 end sub
 
 sub onError(event)
-    data = event.getData()
     ' todo pass error to searchview
-    print "data:", data
+    data = event.getData()
+    m.searchView.listData = data    
 end sub
