@@ -64,6 +64,8 @@ sub onInput(event)
     if Len(m.top.keyboardText) >= 1     
         m.searchlist.content = invalid
         m.inputTimer.control = "start"
+    else
+        m.noResultsLabel.visible = false
     end if
 end sub
 
@@ -138,7 +140,7 @@ sub onFilterSelected(event)
     m.currentFilter = itemIndex
     rowContent.getChild(itemIndex).isselected = true
     m.top.currentFilter = m.filters[itemIndex]
-    search()
+    if Len(m.top.keyboardText) >= 1 then search()
 end sub
 
 sub OnShowSpinnerChange(event)

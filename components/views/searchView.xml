@@ -26,8 +26,8 @@
           itemSize="[600,50]"
           rowHeights="[100]"
           numRows="1"
-          rowItemSize="[[150,54]]"
-          rowItemSpacing="[[20,10]]"
+          rowItemSize="[[144,54]]"
+          rowItemSpacing="[[28,10]]"
           focusXOffset="[90]"
           rowLabelOffset="[ [90, 0] ]"
           showRowLabel="[true,false]"/>
