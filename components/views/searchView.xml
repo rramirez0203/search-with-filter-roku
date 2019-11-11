@@ -37,7 +37,7 @@
           rowTitleComponentName="rowTitleItem"
           drawFocusFeedback="true"
           showRowCounter="[false]"
-          translation="[700,225]"
+          translation="[700,210]"
           vertFocusAnimationStyle="floatingFocus"
           rowFocusAnimationStyle="floatingFocus"
           itemComponentName="SearchItem"        

@@ -7,8 +7,9 @@
     <![CDATA[
   function itemContentChanged() as void
     itemData = m.top.content    
-    m.buttonTitle.translation=[0,-20]    
+    m.buttonTitle.translation=[0,0]    
     m.buttonTitle.text = UCase(itemData.title)
+    m.buttonTitle.font.size = 40
   end function
 
   function init() as void
@@ -18,8 +19,8 @@
     ]]>
 </script>
 <children>
-    <LayoutGroup layoutDirection="vert" vertAlignment="top" itemSpacings="0" translation="[0,-5]" >        
-        <Label id="itemText" horizAlign="center" translation="[0,0]" font="font:MediumSystemFont" width="196" height="65" />
+    <LayoutGroup layoutDirection="vert" vertAlignment="top" itemSpacings="0" translation="[0,5]" >        
+        <Label id="itemText" vertAlign="center" horizAlign="center" translation="[0,0]" font="font:MediumSystemFont" width="196" height="100" />
     </LayoutGroup>
 </children>
 </component>
