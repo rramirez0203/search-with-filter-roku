@@ -9,6 +9,10 @@ sub init()
     m.searchList = m.top.findNode("searchList")
     m.noResultsLabel = m.top.findNode("noResultsLabel")
     m.searchListFilters = m.top.findNode("searchListFilters")
+    m.spinner = m.top.findNode("spinner")
+    m.spinner.poster.uri="pkg:/images/loadingIndicator.png"
+    m.spinner.poster.width="128"
+    m.spinner.poster.height="128"
     m.inputTimer.ObserveField("fire", "search")
     m.top.observeField("listData", "onListContentChange")
     m.top.observeField("filterSelected", "onFilterSelected")
@@ -16,6 +20,7 @@ sub init()
     m.filters = ["", "movie", "series"]
     m.presentListAnimation = m.top.findNode("presentListAnimation")
     m.presentKeyboardAnimation = m.top.findNode("presentKeyboardAnimation")
+    m.top.observeField("showSpinner","OnShowSpinnerChange")
 end sub
 
 sub focusKeyboard(animate=false)
@@ -44,10 +49,10 @@ end sub
 
 sub search()
     ? "@@@@@@@@ search @@@@@@@@"
+    m.top.showSpinner = true
     m.searchlist.content = invalid
     m.searchList.visible = false
     m.searchList.jumpToRowItem = [0, 0]
-    ' m.top.showSpinner = true
     m.noResultsLabel.visible = false
     m.top.searching = true
 end sub
@@ -71,6 +76,7 @@ end sub
 
 sub onListContentChange(event)
     data = event.getData()
+    m.top.showSpinner = false
     print "####### onListContentChange #######", data
     if data.doesExist("isError") and data.isError
         m.searchList.visible = false
@@ -114,7 +120,7 @@ function onKeyEvent(key as string, press as boolean) as boolean
         else if key = "left" and m.searchList.hasFocus()
             focusKeyboard(true)
             handled = true
-        else if key = "right" and m.searchKeyboard.isInFocusChain() and not m.top.searching and m.searchList.content <> invalid and m.searchList.visible
+        else if key = "right" and (m.searchKeyboard.isInFocusChain() or m.searchListFilters.isInFocusChain()) and not m.top.searching and m.searchList.content <> invalid and m.searchList.visible
             focusList(true)
             handled = true
         else if key = "back"
@@ -133,4 +139,15 @@ sub onFilterSelected(event)
     rowContent.getChild(itemIndex).isselected = true
     m.top.currentFilter = m.filters[itemIndex]
     search()
+end sub
+
+sub OnShowSpinnerChange(event)
+    print "@@@@@@@@ OnShowSpinnerChange @@@@@@@@"
+  if event.getData()
+    m.spinner.visible = true
+    m.spinner.control = "start"
+  else
+    m.spinner.visible = false
+    m.spinner.control = "stop"
+  end if
 end sub

@@ -49,9 +49,9 @@
           focusXOffset="[0]"
           rowLabelOffset="[ [0, 0] ]"
           showRowLabel="[true,false]"/>
-        <Label id="noResultsLabel" horizAlign="left" vertAlign="top" visible="false" color="#eeeeee" translation="[860,200]" width="990" wrap="true"></Label>
+        <Label id="noResultsLabel" horizAlign="center" vertAlign="top" visible="false" color="#eeeeee" translation="[745,446]" width="990" wrap="true"></Label>
       </Group>
-      <!-- <BusySpinner id="spinner" clockwise="true" spinInterval="0.8" visible="true"/> -->
+      <BusySpinner id="spinner" clockwise="true" spinInterval="0.8" visible="false" translation="[1160,400]"/>
     </Rectangle>
     <Timer id="inputTimer" repeat="false" duration="0.8"/>
     <ParallelAnimation id="presentListAnimation">
